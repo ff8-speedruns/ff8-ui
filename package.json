@@ -1,0 +1,52 @@
+{
+  "name": "@ff8-speedruns/ui",
+  "version": "1.0.0",
+  "description": "Shared Mantine theme and app shell for the FF8 speedrunning tools.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ff8-speedruns/ff8-ui.git"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "release": "node scripts/release.js"
+  },
+  "peerDependencies": {
+    "@mantine/core": "^9.5.0",
+    "@mantine/hooks": "^9.5.0",
+    "@tabler/icons-react": "^3.46.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@mantine/core": "^9.5.0",
+    "@mantine/hooks": "^9.5.0",
+    "@tabler/icons-react": "^3.46.0",
+    "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "prop-types": "^15.8.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vite": "^8.2.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  }
+}
