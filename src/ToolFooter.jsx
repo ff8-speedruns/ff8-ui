@@ -7,7 +7,7 @@ export function ToolFooter({ credits, repo }) {
     <>
       <Divider my="xl" />
       <Group justify="space-between" align="flex-start" gap="md" mb="xl">
-        <Text size="sm" c="dimmed" style={{ flex: '1 1 20rem' }}>
+        <Text size="sm" c="dimmed" className="ff8-footer-credits">
           {credits ? <>Credit: {credits}</> : null}
         </Text>
         <Group gap="md" wrap="nowrap">

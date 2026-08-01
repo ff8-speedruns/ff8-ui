@@ -172,7 +172,7 @@ function z({ credits: e, repo: n }) {
 		children: [/* @__PURE__ */ y(l, {
 			size: "sm",
 			c: "dimmed",
-			style: { flex: "1 1 20rem" },
+			className: "ff8-footer-credits",
 			children: e ? /* @__PURE__ */ b(v, { children: ["Credit: ", e] }) : null
 		}), /* @__PURE__ */ b(o, {
 			gap: "md",

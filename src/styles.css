@@ -1,12 +1,74 @@
 /* Shared chrome. Loaded via `import '@ff8-speedruns/ui/styles.css'` after
    Mantine's own stylesheet, so these can lean on Mantine's CSS variables. */
 
+.ff8-footer-credits {
+  /* Wraps onto its own line before the back-link group gets crowded. */
+  flex: 1 1 20rem;
+}
+
 .ff8-shell-main {
   background-color: var(--mantine-color-gray-0);
 }
 
 [data-mantine-color-scheme='dark'] .ff8-shell-main {
   background-color: var(--mantine-color-dark-8);
+}
+
+/* ---------------------------------------------------------------------------
+   Virtualized table. For a filterable list long enough that rendering every
+   row gets expensive regardless of how much any individual row changed (see
+   fish-fins / fish-fins-kai) — a handful of real DOM rows exist at a time,
+   recycled as you scroll, so cost stays flat no matter how many rows the
+   underlying data has.
+
+   Built with flexbox rather than a native <table>, because a virtualizer
+   positions rows absolutely within a fixed-height scroll area, which native
+   table row layout doesn't support. Consuming code is responsible for adding
+   the ARIA roles a real table would give for free (role="table"/"row"/"cell"
+   etc.) — ff8-ui doesn't own the column structure, so it can't add them here.
+   --------------------------------------------------------------------------- */
+
+.ff8-vtable {
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-sm);
+  overflow: hidden;
+}
+
+.ff8-vtable-head {
+  display: flex;
+  background-color: var(--mantine-color-default-hover);
+  border-bottom: 1px solid var(--mantine-color-default-border);
+  font-weight: 600;
+  font-size: var(--mantine-font-size-sm);
+}
+
+.ff8-vtable-scroll {
+  overflow: auto;
+}
+
+.ff8-vtable-body {
+  position: relative;
+  width: 100%;
+}
+
+.ff8-vtable-row {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1px solid var(--mantine-color-default-border);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.ff8-vtable-row:hover {
+  background-color: var(--mantine-color-default-hover);
+}
+
+.ff8-vtable-cell {
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  overflow: hidden;
 }
 
 /* ---------------------------------------------------------------------------
