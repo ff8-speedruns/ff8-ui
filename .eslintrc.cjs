@@ -13,7 +13,7 @@ module.exports = {
   overrides: [
     {
       // Build tooling, not browser code.
-      files: ['scripts/**/*.js', 'vite.config.js'],
+      files: ['vite.config.js'],
       env: { node: true, browser: false },
     },
   ],

@@ -10,7 +10,7 @@ which is why `dist/` is committed to the repo.
 
 ```json
 "dependencies": {
-  "@ff8-speedruns/ui": "github:ff8-speedruns/ff8-ui#v1.0.0",
+  "@ff8-speedruns/ui": "github:ff8-speedruns/ff8-ui#semver:^1.1.0",
   "@mantine/core": "^9.5.0",
   "@mantine/hooks": "^9.5.0",
   "@tabler/icons-react": "^3.46.0",
@@ -18,6 +18,13 @@ which is why `dist/` is committed to the repo.
   "react-dom": "^19.2.0"
 }
 ```
+
+The `#semver:^1.1.0` range pins the major version, not an exact tag. A patch or
+minor release (`v1.1.1`, `v1.2.0`, ...) becomes available to every tool right
+away, but nothing pulls it in automatically — a tool only picks it up when
+someone runs `npm update @ff8-speedruns/ui` there and commits the updated
+lockfile. A breaking `v2.0.0` release won't match `^1.1.0` at all, so it can't
+reach a tool by accident; bump the range deliberately when you're ready for it.
 
 `main.jsx`:
 
@@ -116,16 +123,27 @@ npm install
 npm run build      # or: npm run watch
 ```
 
-To test a change against a tool before tagging, point that tool at your working
-copy: `npm install ../ff8-ui` (this writes a `file:` dependency, so remember to
-put the `github:` line back before committing).
+To test a change against a tool before releasing it, point that tool at your
+working copy: `npm install ../ff8-ui` (this rewrites the dependency to a local
+`file:` path in that tool's `node_modules` without touching its `package.json`
+if you pass `--no-save`; otherwise remember to put the `github:` line back
+before committing).
 
 ## Releasing
 
+Releases run in CI, not locally — this repo is installed straight from git, so
+whatever gets tagged has to be built and pushed from somewhere that can
+authenticate to GitHub without relying on one person's machine having the
+right SSH key or credentials lying around.
+
+From the **Actions** tab, run **Release**, or:
+
 ```bash
-npm run release -- 1.1.0
+gh workflow run release.yml -f version=1.2.0
 ```
 
-That rebuilds `dist/`, commits it with the version bump, and tags `v1.1.0`. It
-does not push. Once you've pushed, bump the tag in each tool that should pick
-the change up — tools stay on their pinned tag until you do, which is the point.
+It bumps `package.json`, rebuilds `dist/`, commits, tags `vX.Y.Z`, and pushes —
+all using the workflow's own repo-scoped token. Nothing needs pushing by hand
+afterward. Tools tracking a `#semver:` range (see above) can pick up the new
+version with `npm update @ff8-speedruns/ui`; tools pinned to an exact tag need
+their `package.json` updated directly.
