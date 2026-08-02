@@ -64,11 +64,26 @@ jobs:
       - name: Commit and tag
         run: |
           git add package.json dist
-          git commit -m "Release v${{ inputs.version }}"
-          git tag "v${{ inputs.version }}"
+          # Tolerate a re-run after a partial previous failure: if a prior run
+          # already got as far as committing this exact version+build, there's
+          # nothing new to stage, and a bare `git commit` would fail on
+          # "nothing to commit". Tag whatever HEAD already is in that case.
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit — tagging the existing HEAD."
+          else
+            git commit -m "Release v${{ inputs.version }}"
+          fi
+          # Annotated (-a), not lightweight: `git push --follow-tags` silently
+          # skips lightweight tags, so a plain `git tag vX.Y.Z` here would
+          # commit fine and push fine and just never actually publish the tag.
+          git tag -a "v${{ inputs.version }}" -m "Release v${{ inputs.version }}"
 
       - name: Push
-        run: git push origin HEAD:main --follow-tags
+        # Push the tag explicitly rather than leaning on --follow-tags at all —
+        # one less git behavior to have to remember correctly.
+        run: |
+          git push origin HEAD:main
+          git push origin "v${{ inputs.version }}"
 
       - name: Summary
         run: |
