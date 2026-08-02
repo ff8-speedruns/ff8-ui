@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { ActionIcon, Box } from '@mantine/core';
+import { IconArrowUp, IconArrowDown, IconArrowLeft, IconArrowRight, IconAsterisk } from '@tabler/icons-react';
 
 const ARROW_KEYS = {
   ArrowUp: 'up',
@@ -21,12 +23,21 @@ function isTypingTarget(target) {
   return Boolean(target) && (TEXT_ENTRY.has(target.tagName) || target.isContentEditable);
 }
 
+const iconStyle = { width: '65%', height: '65%' };
+
 /**
- * The directional pad shared by the pole-skip and final-party manips. It owns
- * the widget and the key bindings; what a press *means* stays in the tool via
- * `onPress`, which receives 'up' | 'down' | 'left' | 'right' | 'wild'.
+ * The directional pad shared by the pole-skip and final-party manips — a
+ * plain grid of Mantine ActionIcons, not custom-drawn CSS. A hand-rolled
+ * pseudo-element version of this lived here before; it kept surfacing CSS
+ * specificity bugs (generic `.ff8-dpad a` rules silently beating the
+ * per-direction overrides for width/height/color/etc.) that were tedious to
+ * find and easy to reintroduce. Plain ActionIcons in a grid can't have that
+ * problem — there's no cascade to fight.
+ *
+ * Owns the widget and the key bindings; what a press *means* stays in the
+ * tool via `onPress`, which receives 'up' | 'down' | 'left' | 'right' | 'wild'.
  */
-export function DPad({ onPress, withWild = false, active = null, keyboard = true, keys = 'all' }) {
+export function DPad({ onPress, withWild = false, keyboard = true, keys = 'all' }) {
   useEffect(() => {
     if (!keyboard) return undefined;
 
@@ -50,36 +61,52 @@ export function DPad({ onPress, withWild = false, active = null, keyboard = true
     return () => window.removeEventListener('keydown', handler);
   }, [onPress, keyboard, keys]);
 
-  const press = (direction) => (event) => {
-    event.preventDefault();
-    onPress(direction);
-  };
+  const press = (direction) => () => onPress(direction);
 
   return (
-    <div className="ff8-dpad-set">
-      <div
-        className={['ff8-dpad', active && `ff8-dpad--${active}`, withWild && 'ff8-dpad--wild']
-          .filter(Boolean)
-          .join(' ')}
-      >
-        <a className="ff8-dpad__up" href="#up" onClick={press('up')} aria-label="Up" />
-        <a className="ff8-dpad__right" href="#right" onClick={press('right')} aria-label="Right" />
-        <a className="ff8-dpad__down" href="#down" onClick={press('down')} aria-label="Down" />
-        <a className="ff8-dpad__left" href="#left" onClick={press('left')} aria-label="Left" />
-        {withWild && (
-          <a className="ff8-dpad__wild" href="#wild" onClick={press('wild')} aria-label="Wild">
-            ✱
-          </a>
-        )}
-      </div>
-    </div>
+    <Box
+      style={{
+        display: 'inline-grid',
+        gridTemplateAreas: `". up ." "left center right" ". down ."`,
+        // Matches ActionIcon's actual xl size (--ai-size-xl: 2.75rem), so
+        // there's no gap between the button and its grid cell.
+        gridTemplateColumns: 'repeat(3, 2.75rem)',
+        gridTemplateRows: 'repeat(3, 2.75rem)',
+        gap: 'var(--mantine-spacing-xs)',
+        justifyItems: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <ActionIcon style={{ gridArea: 'up' }} size="xl" variant="default" onClick={press('up')} aria-label="Up">
+        <IconArrowUp style={iconStyle} />
+      </ActionIcon>
+      <ActionIcon style={{ gridArea: 'left' }} size="xl" variant="default" onClick={press('left')} aria-label="Left">
+        <IconArrowLeft style={iconStyle} />
+      </ActionIcon>
+      {withWild && (
+        <ActionIcon
+          style={{ gridArea: 'center' }}
+          size="xl"
+          variant="default"
+          onClick={press('wild')}
+          aria-label="Wild"
+        >
+          <IconAsterisk style={iconStyle} />
+        </ActionIcon>
+      )}
+      <ActionIcon style={{ gridArea: 'right' }} size="xl" variant="default" onClick={press('right')} aria-label="Right">
+        <IconArrowRight style={iconStyle} />
+      </ActionIcon>
+      <ActionIcon style={{ gridArea: 'down' }} size="xl" variant="default" onClick={press('down')} aria-label="Down">
+        <IconArrowDown style={iconStyle} />
+      </ActionIcon>
+    </Box>
   );
 }
 
 DPad.propTypes = {
   onPress: PropTypes.func.isRequired,
   withWild: PropTypes.bool,
-  active: PropTypes.oneOf(['up', 'down', 'left', 'right']),
   keyboard: PropTypes.bool,
   /** 'all' binds arrows and WASD; 'arrows' binds the arrow keys only. */
   keys: PropTypes.oneOf(['all', 'arrows']),

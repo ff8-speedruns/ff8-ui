@@ -1,18 +1,18 @@
-import { ActionIcon as e, Anchor as t, AppShell as n, Badge as r, Container as i, Divider as a, Group as o, MantineProvider as s, Stack as c, Text as l, Title as u, Tooltip as d, createTheme as f, localStorageColorSchemeManager as p, useComputedColorScheme as m, useMantineColorScheme as h } from "@mantine/core";
-import g from "prop-types";
-import { useHotkeys as _ } from "@mantine/hooks";
-import { Fragment as v, jsx as y, jsxs as b } from "react/jsx-runtime";
-import { IconArrowNarrowLeft as x, IconBrandGithub as S, IconMoonStars as C, IconSun as w } from "@tabler/icons-react";
-import { useEffect as T } from "react";
+import { ActionIcon as e, Anchor as t, AppShell as n, Badge as r, Box as i, Container as a, Divider as o, Group as s, MantineProvider as c, Stack as l, Text as u, Title as d, Tooltip as f, createTheme as p, localStorageColorSchemeManager as m, useComputedColorScheme as h, useMantineColorScheme as g } from "@mantine/core";
+import _ from "prop-types";
+import { useHotkeys as v } from "@mantine/hooks";
+import { Fragment as y, jsx as b, jsxs as x } from "react/jsx-runtime";
+import { IconArrowDown as S, IconArrowLeft as C, IconArrowNarrowLeft as w, IconArrowRight as T, IconArrowUp as E, IconAsterisk as D, IconBrandGithub as O, IconMoonStars as k, IconSun as A } from "@tabler/icons-react";
+import { useEffect as j } from "react";
 //#region src/theme.js
-var E = {
+var M = {
 	from: "blue",
 	to: "cyan",
 	deg: 45
-}, D = f({
+}, N = p({
 	primaryColor: "blue",
 	defaultRadius: "md",
-	defaultGradient: E,
+	defaultGradient: M,
 	cursorType: "pointer",
 	autoContrast: !0,
 	headings: {
@@ -27,7 +27,7 @@ var E = {
 		} },
 		Badge: { defaultProps: { variant: "filled" } }
 	}
-}), O = "/", k = "https://github.com/ff8-speedruns", A = "ff8-color-scheme", j = {
+}), P = "/", F = "https://github.com/ff8-speedruns", I = "ff8-color-scheme", L = {
 	working: {
 		label: "Working",
 		color: "green"
@@ -45,27 +45,27 @@ var E = {
 		color: "gray"
 	}
 };
-function M(e) {
-	return e?.startsWith("http") ? e : `${k}/${e}`;
+function R(e) {
+	return e?.startsWith("http") ? e : `${F}/${e}`;
 }
 //#endregion
 //#region src/FF8Provider.jsx
-var N = p({ key: A });
-function P() {
-	let { setColorScheme: e } = h(), t = m("light", { getInitialValueInEffect: !1 });
-	return _([["mod+J", () => e(t === "dark" ? "light" : "dark")]]), null;
+var z = m({ key: I });
+function B() {
+	let { setColorScheme: e } = g(), t = h("light", { getInitialValueInEffect: !1 });
+	return v([["mod+J", () => e(t === "dark" ? "light" : "dark")]]), null;
 }
-function F({ children: e, defaultColorScheme: t = "auto" }) {
-	return /* @__PURE__ */ b(s, {
-		theme: D,
-		colorSchemeManager: N,
+function V({ children: e, defaultColorScheme: t = "auto" }) {
+	return /* @__PURE__ */ x(c, {
+		theme: N,
+		colorSchemeManager: z,
 		defaultColorScheme: t,
-		children: [/* @__PURE__ */ y(P, {}), e]
+		children: [/* @__PURE__ */ b(B, {}), e]
 	});
 }
-F.propTypes = {
-	children: g.node,
-	defaultColorScheme: g.oneOf([
+V.propTypes = {
+	children: _.node,
+	defaultColorScheme: _.oneOf([
 		"light",
 		"dark",
 		"auto"
@@ -73,117 +73,117 @@ F.propTypes = {
 };
 //#endregion
 //#region src/ColorSchemeToggle.jsx
-function I({ size: t = "lg", variant: n = "default" }) {
-	let { setColorScheme: r } = h(), i = m("light", { getInitialValueInEffect: !1 }) === "dark";
-	return /* @__PURE__ */ y(d, {
+function H({ size: t = "lg", variant: n = "default" }) {
+	let { setColorScheme: r } = g(), i = h("light", { getInitialValueInEffect: !1 }) === "dark";
+	return /* @__PURE__ */ b(f, {
 		label: i ? "Switch to light mode" : "Switch to dark mode",
-		children: /* @__PURE__ */ y(e, {
+		children: /* @__PURE__ */ b(e, {
 			size: t,
 			variant: n,
 			color: i ? "yellow" : "blue",
 			onClick: () => r(i ? "light" : "dark"),
 			"aria-label": "Toggle color scheme",
-			children: y(i ? w : C, { size: "1.1rem" })
+			children: b(i ? A : k, { size: "1.1rem" })
 		})
 	});
 }
-I.propTypes = {
-	size: g.string,
-	variant: g.string
+H.propTypes = {
+	size: _.string,
+	variant: _.string
 };
 //#endregion
 //#region src/StatusBadge.jsx
-function L({ status: e, ...t }) {
-	let n = j[e];
-	return n ? /* @__PURE__ */ y(r, {
+function U({ status: e, ...t }) {
+	let n = L[e];
+	return n ? /* @__PURE__ */ b(r, {
 		color: n.color,
 		variant: "filled",
 		...t,
 		children: n.label
 	}) : null;
 }
-L.propTypes = { status: g.oneOf(Object.keys(j)) };
+U.propTypes = { status: _.oneOf(Object.keys(L)) };
 //#endregion
 //#region src/SiteHeader.jsx
-function R({ title: t, status: n, repo: r, withBackLink: i = !0 }) {
-	return /* @__PURE__ */ b(o, {
+function W({ title: t, status: n, repo: r, withBackLink: i = !0 }) {
+	return /* @__PURE__ */ x(s, {
 		h: "100%",
 		px: "md",
 		justify: "space-between",
 		wrap: "nowrap",
-		children: [/* @__PURE__ */ b(o, {
+		children: [/* @__PURE__ */ x(s, {
 			gap: "xs",
 			wrap: "nowrap",
 			children: [
-				i && /* @__PURE__ */ y(d, {
+				i && /* @__PURE__ */ b(f, {
 					label: "Back to Garden",
-					children: /* @__PURE__ */ y(e, {
+					children: /* @__PURE__ */ b(e, {
 						size: "lg",
 						variant: "default",
 						component: "a",
 						href: "/",
 						"aria-label": "Back to Garden",
-						children: /* @__PURE__ */ y(x, { size: "1.1rem" })
+						children: /* @__PURE__ */ b(w, { size: "1.1rem" })
 					})
 				}),
-				/* @__PURE__ */ y(u, {
+				/* @__PURE__ */ b(d, {
 					order: 3,
 					lineClamp: 1,
 					children: t
 				}),
-				/* @__PURE__ */ y(L, {
+				/* @__PURE__ */ b(U, {
 					status: n,
 					visibleFrom: "sm"
 				})
 			]
-		}), /* @__PURE__ */ b(o, {
+		}), /* @__PURE__ */ x(s, {
 			gap: "xs",
 			wrap: "nowrap",
-			children: [r && /* @__PURE__ */ y(d, {
+			children: [r && /* @__PURE__ */ b(f, {
 				label: "Source on GitHub",
-				children: /* @__PURE__ */ y(e, {
+				children: /* @__PURE__ */ b(e, {
 					size: "lg",
 					variant: "default",
 					component: "a",
-					href: M(r),
+					href: R(r),
 					target: "_blank",
 					rel: "noreferrer",
 					"aria-label": "Source on GitHub",
-					children: /* @__PURE__ */ y(S, { size: "1.1rem" })
+					children: /* @__PURE__ */ b(O, { size: "1.1rem" })
 				})
-			}), /* @__PURE__ */ y(I, {})]
+			}), /* @__PURE__ */ b(H, {})]
 		})]
 	});
 }
-R.propTypes = {
-	title: g.node.isRequired,
-	status: g.string,
-	repo: g.string,
-	withBackLink: g.bool
+W.propTypes = {
+	title: _.node.isRequired,
+	status: _.string,
+	repo: _.string,
+	withBackLink: _.bool
 };
 //#endregion
 //#region src/ToolFooter.jsx
-function z({ credits: e, repo: n }) {
-	return /* @__PURE__ */ b(v, { children: [/* @__PURE__ */ y(a, { my: "xl" }), /* @__PURE__ */ b(o, {
+function G({ credits: e, repo: n }) {
+	return /* @__PURE__ */ x(y, { children: [/* @__PURE__ */ b(o, { my: "xl" }), /* @__PURE__ */ x(s, {
 		justify: "space-between",
 		align: "flex-start",
 		gap: "md",
 		mb: "xl",
-		children: [/* @__PURE__ */ y(l, {
+		children: [/* @__PURE__ */ b(u, {
 			size: "sm",
 			c: "dimmed",
 			className: "ff8-footer-credits",
-			children: e ? /* @__PURE__ */ b(v, { children: ["Credit: ", e] }) : null
-		}), /* @__PURE__ */ b(o, {
+			children: e ? /* @__PURE__ */ x(y, { children: ["Credit: ", e] }) : null
+		}), /* @__PURE__ */ x(s, {
 			gap: "md",
 			wrap: "nowrap",
-			children: [/* @__PURE__ */ y(t, {
+			children: [/* @__PURE__ */ b(t, {
 				size: "sm",
 				href: "/",
 				children: "Back to Garden"
-			}), n && /* @__PURE__ */ y(t, {
+			}), n && /* @__PURE__ */ b(t, {
 				size: "sm",
-				href: M(n),
+				href: R(n),
 				target: "_blank",
 				rel: "noreferrer",
 				children: "Source"
@@ -191,37 +191,37 @@ function z({ credits: e, repo: n }) {
 		})]
 	})] });
 }
-z.propTypes = {
-	credits: g.node,
-	repo: g.string
+G.propTypes = {
+	credits: _.node,
+	repo: _.string
 };
 //#endregion
 //#region src/ToolShell.jsx
-function B({ title: e, status: r, repo: a, intro: s, links: u = [], credits: d, size: f = "lg", children: p }) {
-	let m = !!s || u.length > 0;
-	return /* @__PURE__ */ b(n, {
+function K({ title: e, status: r, repo: i, intro: o, links: c = [], credits: d, size: f = "lg", children: p }) {
+	let m = !!o || c.length > 0;
+	return /* @__PURE__ */ x(n, {
 		header: { height: 60 },
 		padding: "md",
-		children: [/* @__PURE__ */ y(n.Header, { children: /* @__PURE__ */ y(R, {
+		children: [/* @__PURE__ */ b(n.Header, { children: /* @__PURE__ */ b(W, {
 			title: e,
 			status: r,
-			repo: a
-		}) }), /* @__PURE__ */ y(n.Main, {
+			repo: i
+		}) }), /* @__PURE__ */ b(n.Main, {
 			className: "ff8-shell-main",
-			children: /* @__PURE__ */ b(i, {
+			children: /* @__PURE__ */ x(a, {
 				size: f,
 				px: 0,
 				children: [
-					m && /* @__PURE__ */ b(c, {
+					m && /* @__PURE__ */ x(l, {
 						gap: "xs",
 						mb: "lg",
-						children: [s && /* @__PURE__ */ y(l, {
+						children: [o && /* @__PURE__ */ b(u, {
 							size: "sm",
 							c: "dimmed",
-							children: s
-						}), u.length > 0 && /* @__PURE__ */ y(o, {
+							children: o
+						}), c.length > 0 && /* @__PURE__ */ b(s, {
 							gap: "md",
-							children: u.map((e) => /* @__PURE__ */ y(t, {
+							children: c.map((e) => /* @__PURE__ */ b(t, {
 								size: "sm",
 								href: e.href,
 								target: e.href.startsWith("http") ? "_blank" : void 0,
@@ -231,120 +231,126 @@ function B({ title: e, status: r, repo: a, intro: s, links: u = [], credits: d, 
 						})]
 					}),
 					p,
-					/* @__PURE__ */ y(z, {
+					/* @__PURE__ */ b(G, {
 						credits: d,
-						repo: a
+						repo: i
 					})
 				]
 			})
 		})]
 	});
 }
-B.propTypes = {
-	title: g.node.isRequired,
-	status: g.string,
-	repo: g.string,
-	intro: g.node,
-	links: g.arrayOf(g.shape({
-		label: g.node.isRequired,
-		href: g.string.isRequired
+K.propTypes = {
+	title: _.node.isRequired,
+	status: _.string,
+	repo: _.string,
+	intro: _.node,
+	links: _.arrayOf(_.shape({
+		label: _.node.isRequired,
+		href: _.string.isRequired
 	})),
-	credits: g.node,
-	size: g.oneOfType([g.string, g.number]),
-	children: g.node
+	credits: _.node,
+	size: _.oneOfType([_.string, _.number]),
+	children: _.node
 };
 //#endregion
 //#region src/DPad.jsx
-var V = {
+var q = {
 	ArrowUp: "up",
 	ArrowDown: "down",
 	ArrowLeft: "left",
 	ArrowRight: "right"
-}, H = {
+}, J = {
 	w: "up",
 	s: "down",
 	a: "left",
 	d: "right"
-}, U = /* @__PURE__ */ new Set([
+}, Y = /* @__PURE__ */ new Set([
 	"INPUT",
 	"TEXTAREA",
 	"SELECT"
 ]);
-function W(e) {
-	return !!e && (U.has(e.tagName) || e.isContentEditable);
+function X(e) {
+	return !!e && (Y.has(e.tagName) || e.isContentEditable);
 }
-function G({ onPress: e, withWild: t = !1, active: n = null, keyboard: r = !0, keys: i = "all" }) {
-	T(() => {
+var Z = {
+	width: "65%",
+	height: "65%"
+};
+function Q({ onPress: t, withWild: n = !1, keyboard: r = !0, keys: a = "all" }) {
+	j(() => {
 		if (!r) return;
-		let t = (t) => {
-			if (t.ctrlKey || t.metaKey || t.altKey) return;
-			let n = W(t.target), r = i === "all" && !n ? H[t.key?.toLowerCase()] : void 0, a = V[t.key] ?? r;
-			a && (t.preventDefault(), e(a));
+		let e = (e) => {
+			if (e.ctrlKey || e.metaKey || e.altKey) return;
+			let n = X(e.target), r = a === "all" && !n ? J[e.key?.toLowerCase()] : void 0, i = q[e.key] ?? r;
+			i && (e.preventDefault(), t(i));
 		};
-		return window.addEventListener("keydown", t), () => window.removeEventListener("keydown", t);
+		return window.addEventListener("keydown", e), () => window.removeEventListener("keydown", e);
 	}, [
-		e,
+		t,
 		r,
-		i
+		a
 	]);
-	let a = (t) => (n) => {
-		n.preventDefault(), e(t);
-	};
-	return /* @__PURE__ */ y("div", {
-		className: "ff8-dpad-set",
-		children: /* @__PURE__ */ b("div", {
-			className: [
-				"ff8-dpad",
-				n && `ff8-dpad--${n}`,
-				t && "ff8-dpad--wild"
-			].filter(Boolean).join(" "),
-			children: [
-				/* @__PURE__ */ y("a", {
-					className: "ff8-dpad__up",
-					href: "#up",
-					onClick: a("up"),
-					"aria-label": "Up"
-				}),
-				/* @__PURE__ */ y("a", {
-					className: "ff8-dpad__right",
-					href: "#right",
-					onClick: a("right"),
-					"aria-label": "Right"
-				}),
-				/* @__PURE__ */ y("a", {
-					className: "ff8-dpad__down",
-					href: "#down",
-					onClick: a("down"),
-					"aria-label": "Down"
-				}),
-				/* @__PURE__ */ y("a", {
-					className: "ff8-dpad__left",
-					href: "#left",
-					onClick: a("left"),
-					"aria-label": "Left"
-				}),
-				t && /* @__PURE__ */ y("a", {
-					className: "ff8-dpad__wild",
-					href: "#wild",
-					onClick: a("wild"),
-					"aria-label": "Wild",
-					children: "✱"
-				})
-			]
-		})
+	let o = (e) => () => t(e);
+	return /* @__PURE__ */ x(i, {
+		style: {
+			display: "inline-grid",
+			gridTemplateAreas: "\". up .\" \"left center right\" \". down .\"",
+			gridTemplateColumns: "repeat(3, 2.75rem)",
+			gridTemplateRows: "repeat(3, 2.75rem)",
+			gap: "var(--mantine-spacing-xs)",
+			justifyItems: "center",
+			alignItems: "center"
+		},
+		children: [
+			/* @__PURE__ */ b(e, {
+				style: { gridArea: "up" },
+				size: "xl",
+				variant: "default",
+				onClick: o("up"),
+				"aria-label": "Up",
+				children: /* @__PURE__ */ b(E, { style: Z })
+			}),
+			/* @__PURE__ */ b(e, {
+				style: { gridArea: "left" },
+				size: "xl",
+				variant: "default",
+				onClick: o("left"),
+				"aria-label": "Left",
+				children: /* @__PURE__ */ b(C, { style: Z })
+			}),
+			n && /* @__PURE__ */ b(e, {
+				style: { gridArea: "center" },
+				size: "xl",
+				variant: "default",
+				onClick: o("wild"),
+				"aria-label": "Wild",
+				children: /* @__PURE__ */ b(D, { style: Z })
+			}),
+			/* @__PURE__ */ b(e, {
+				style: { gridArea: "right" },
+				size: "xl",
+				variant: "default",
+				onClick: o("right"),
+				"aria-label": "Right",
+				children: /* @__PURE__ */ b(T, { style: Z })
+			}),
+			/* @__PURE__ */ b(e, {
+				style: { gridArea: "down" },
+				size: "xl",
+				variant: "default",
+				onClick: o("down"),
+				"aria-label": "Down",
+				children: /* @__PURE__ */ b(S, { style: Z })
+			})
+		]
 	});
 }
-G.propTypes = {
-	onPress: g.func.isRequired,
-	withWild: g.bool,
-	active: g.oneOf([
-		"up",
-		"down",
-		"left",
-		"right"
-	]),
-	keyboard: g.bool,
-	keys: g.oneOf(["all", "arrows"])
+Q.propTypes = {
+	onPress: _.func.isRequired,
+	withWild: _.bool,
+	keyboard: _.bool,
+	keys: _.oneOf(["all", "arrows"])
 };
 //#endregion
-export { E as BRAND_GRADIENT, A as COLOR_SCHEME_KEY, I as ColorSchemeToggle, G as DPad, F as FF8Provider, O as GARDEN_URL, k as ORG_URL, j as STATUSES, R as SiteHeader, L as StatusBadge, z as ToolFooter, B as ToolShell, M as repoUrl, D as theme };
+export { M as BRAND_GRADIENT, I as COLOR_SCHEME_KEY, H as ColorSchemeToggle, Q as DPad, V as FF8Provider, P as GARDEN_URL, F as ORG_URL, L as STATUSES, W as SiteHeader, U as StatusBadge, G as ToolFooter, K as ToolShell, R as repoUrl, N as theme };
