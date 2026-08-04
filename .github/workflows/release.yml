@@ -12,7 +12,7 @@ on:
         type: string
 
 # Needed to commit the version bump + rebuilt dist/, tag, and push back to
-# this repo. Scoped to this workflow only, and only to this repo — the
+# this repo. Scoped to this workflow only, and only to this repo - the
 # built-in GITHUB_TOKEN never needs an SSH key or personal access token.
 permissions:
   contents: write
@@ -69,7 +69,7 @@ jobs:
           # nothing new to stage, and a bare `git commit` would fail on
           # "nothing to commit". Tag whatever HEAD already is in that case.
           if git diff --cached --quiet; then
-            echo "Nothing new to commit — tagging the existing HEAD."
+            echo "Nothing new to commit - tagging the existing HEAD."
           else
             git commit -m "Release v${{ inputs.version }}"
           fi
@@ -79,7 +79,7 @@ jobs:
           git tag -a "v${{ inputs.version }}" -m "Release v${{ inputs.version }}"
 
       - name: Push
-        # Push the tag explicitly rather than leaning on --follow-tags at all —
+        # Push the tag explicitly rather than leaning on --follow-tags at all -
         # one less git behavior to have to remember correctly.
         run: |
           git push origin HEAD:main

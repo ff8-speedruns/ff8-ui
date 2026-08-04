@@ -6,4 +6,4 @@ node_modules
 
 # dist/ is deliberately NOT ignored. Consumers install this package straight
 # from git, so the built output has to be committed for `npm install` to work
-# without a build step. Use `npm run release` — it rebuilds before tagging.
+# without a build step. Use `npm run release` - it rebuilds before tagging.

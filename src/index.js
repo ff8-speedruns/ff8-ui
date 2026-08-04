@@ -1,5 +1,5 @@
 // Imported here so the library build collects it into dist/styles.css.
-// Consumers still import it explicitly — see the README.
+// Consumers still import it explicitly - see the README.
 import './styles.css';
 
 export { theme, BRAND_GRADIENT } from './theme';

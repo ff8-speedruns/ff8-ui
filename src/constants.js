@@ -16,9 +16,9 @@ export const COLOR_SCHEME_KEY = 'ff8-color-scheme';
 // Same vocabulary the hub's tool table uses, so a tool's own badge and its row
 // on the hub can never disagree about what a status is called.
 export const STATUSES = {
-  working: { label: 'Working', color: 'green' },
+  working: { label: 'Working', color: 'green', textColor: 'white' },
   needsTesters: { label: 'Needs Testers', color: 'yellow' },
-  development: { label: 'Development', color: 'orange' },
+  development: { label: 'Development', color: 'orange', textColor: 'white' },
   external: { label: 'External Link', color: 'gray' },
 };
 

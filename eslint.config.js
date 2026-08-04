@@ -26,7 +26,7 @@ export default [
     },
   },
   {
-    // Build tooling, not library code — give it Node globals instead of browser.
+    // Build tooling, not library code - give it Node globals instead of browser.
     files: ['vite.config.js'],
     languageOptions: {
       globals: { ...globals.node },

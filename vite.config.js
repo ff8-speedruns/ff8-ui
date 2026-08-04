@@ -2,8 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'node:path';
 
-// Library build. Everything the consuming tools already have — React, Mantine,
-// the icon set — stays external so we don't ship a second copy of it.
+// Library build. Everything the consuming tools already have - React, Mantine,
+// the icon set - stays external so we don't ship a second copy of it.
 export default defineConfig({
   plugins: [react()],
   build: {

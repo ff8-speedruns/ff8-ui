@@ -7,7 +7,7 @@ export function StatusBadge({ status, ...others }) {
   if (!entry) return null;
 
   return (
-    <Badge color={entry.color} variant="filled" {...others}>
+    <Badge color={entry.color} variant="filled" c={entry.textColor ?? 'black'} {...others}>
       {entry.label}
     </Badge>
   );

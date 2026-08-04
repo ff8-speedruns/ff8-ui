@@ -21,7 +21,7 @@ which is why `dist/` is committed to the repo.
 
 The `#semver:^1.1.0` range pins the major version, not an exact tag. A patch or
 minor release (`v1.1.1`, `v1.2.0`, ...) becomes available to every tool right
-away, but nothing pulls it in automatically — a tool only picks it up when
+away, but nothing pulls it in automatically - a tool only picks it up when
 someone runs `npm update @ff8-speedruns/ui` there and commits the updated
 lockfile. A breaking `v2.0.0` release won't match `^1.1.0` at all, so it can't
 reach a tool by accident; bump the range deliberately when you're ready for it.
@@ -49,7 +49,7 @@ Order matters: Mantine's stylesheet first, ours second.
 ### index.html
 
 Every tool needs this in `<head>`, before the app script. It reads the saved
-colour scheme and sets it on `<html>` before first paint — without it the page
+colour scheme and sets it on `<html>` before first paint - without it the page
 flashes light for a frame on every load for anyone using dark mode.
 
 ```html
@@ -107,7 +107,7 @@ choice follows them from the hub into a tool and back.
 
 ### DPad
 
-Owns the widget and the key bindings — arrow keys always, WASD when focus isn't
+Owns the widget and the key bindings - arrow keys always, WASD when focus isn't
 in a text field. What a press *means* stays in the tool:
 
 ```jsx
@@ -131,7 +131,7 @@ before committing).
 
 ## Releasing
 
-Releases run in CI, not locally — this repo is installed straight from git, so
+Releases run in CI, not locally - this repo is installed straight from git, so
 whatever gets tagged has to be built and pushed from somewhere that can
 authenticate to GitHub without relying on one person's machine having the
 right SSH key or credentials lying around.
@@ -142,7 +142,7 @@ From the **Actions** tab, run **Release**, or:
 gh workflow run release.yml -f version=1.2.0
 ```
 
-It bumps `package.json`, rebuilds `dist/`, commits, tags `vX.Y.Z`, and pushes —
+It bumps `package.json`, rebuilds `dist/`, commits, tags `vX.Y.Z`, and pushes -
 all using the workflow's own repo-scoped token. Nothing needs pushing by hand
 afterward. Tools tracking a `#semver:` range (see above) can pick up the new
 version with `npm update @ff8-speedruns/ui`; tools pinned to an exact tag need

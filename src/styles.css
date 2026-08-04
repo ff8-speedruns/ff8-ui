@@ -17,7 +17,7 @@
 /* ---------------------------------------------------------------------------
    Virtualized table. For a filterable list long enough that rendering every
    row gets expensive regardless of how much any individual row changed (see
-   fish-fins / fish-fins-kai) — a handful of real DOM rows exist at a time,
+   fish-fins / fish-fins-kai) - a handful of real DOM rows exist at a time,
    recycled as you scroll, so cost stays flat no matter how many rows the
    underlying data has.
 
@@ -25,7 +25,7 @@
    positions rows absolutely within a fixed-height scroll area, which native
    table row layout doesn't support. Consuming code is responsible for adding
    the ARIA roles a real table would give for free (role="table"/"row"/"cell"
-   etc.) — ff8-ui doesn't own the column structure, so it can't add them here.
+   etc.) - ff8-ui doesn't own the column structure, so it can't add them here.
    --------------------------------------------------------------------------- */
 
 .ff8-vtable {

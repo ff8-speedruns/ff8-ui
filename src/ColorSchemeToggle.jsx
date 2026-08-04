@@ -4,7 +4,7 @@ import { IconSun, IconMoonStars } from '@tabler/icons-react';
 
 export function ColorSchemeToggle({ size = 'lg', variant = 'default' }) {
   const { setColorScheme } = useMantineColorScheme();
-  // getInitialValueInEffect: false — the inline script in index.html has already
+  // getInitialValueInEffect: false - the inline script in index.html has already
   // resolved the scheme by the time this renders, so there is nothing to defer.
   const computed = useComputedColorScheme('light', { getInitialValueInEffect: false });
   const dark = computed === 'dark';

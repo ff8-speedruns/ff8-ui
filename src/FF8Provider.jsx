@@ -24,7 +24,7 @@ function ColorSchemeHotkey() {
  * Wrap every tool's tree in this. It supplies the shared theme and points the
  * colour-scheme manager at the shared storage key.
  *
- * Pair it with the matching inline script in index.html (see the README) —
+ * Pair it with the matching inline script in index.html (see the README) -
  * without that, the page paints in light mode for a frame before React boots
  * and reads localStorage.
  */

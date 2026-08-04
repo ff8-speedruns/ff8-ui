@@ -26,13 +26,13 @@ function isTypingTarget(target) {
 const iconStyle = { width: '65%', height: '65%' };
 
 /**
- * The directional pad shared by the pole-skip and final-party manips — a
+ * The directional pad shared by the pole-skip and final-party manips - a
  * plain grid of Mantine ActionIcons, not custom-drawn CSS. A hand-rolled
  * pseudo-element version of this lived here before; it kept surfacing CSS
  * specificity bugs (generic `.ff8-dpad a` rules silently beating the
  * per-direction overrides for width/height/color/etc.) that were tedious to
  * find and easy to reintroduce. Plain ActionIcons in a grid can't have that
- * problem — there's no cascade to fight.
+ * problem - there's no cascade to fight.
  *
  * Owns the widget and the key bindings; what a press *means* stays in the
  * tool via `onPress`, which receives 'up' | 'down' | 'left' | 'right' | 'wild'.
@@ -45,7 +45,7 @@ export function DPad({ onPress, withWild = false, keyboard = true, keys = 'all' 
       if (event.ctrlKey || event.metaKey || event.altKey) return;
 
       const typing = isTypingTarget(event.target);
-      // Arrows are always ours — in these tools that is the whole point. Letter
+      // Arrows are always ours - in these tools that is the whole point. Letter
       // keys are not, or you could never type into a field on the page, and
       // some tools want the arrows only.
       const wasd = keys === 'all' && !typing ? WASD_KEYS[event.key?.toLowerCase()] : undefined;
