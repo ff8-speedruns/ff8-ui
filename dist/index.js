@@ -30,7 +30,8 @@ var M = {
 }), P = "/", F = "https://github.com/ff8-speedruns", I = "ff8-color-scheme", L = {
 	working: {
 		label: "Working",
-		color: "green"
+		color: "green",
+		textColor: "white"
 	},
 	needsTesters: {
 		label: "Needs Testers",
@@ -38,7 +39,8 @@ var M = {
 	},
 	development: {
 		label: "Development",
-		color: "orange"
+		color: "orange",
+		textColor: "white"
 	},
 	external: {
 		label: "External Link",
@@ -98,6 +100,7 @@ function U({ status: e, ...t }) {
 	return n ? /* @__PURE__ */ b(r, {
 		color: n.color,
 		variant: "filled",
+		c: n.textColor ?? "black",
 		...t,
 		children: n.label
 	}) : null;
