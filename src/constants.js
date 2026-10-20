@@ -22,6 +22,12 @@ export const STATUSES = {
   external: { label: 'External Link', color: 'gray' },
 };
 
+// Optional sidebar on ToolShell. Below the breakpoint it collapses behind a
+// burger in the header.
+export const NAVBAR_WIDTH = 240;
+export const NAVBAR_BREAKPOINT = 'sm';
+export const NAVBAR_TOGGLE_LABEL = 'Toggle navigation';
+
 export function repoUrl(repo) {
   return repo?.startsWith('http') ? repo : `${ORG_URL}/${repo}`;
 }

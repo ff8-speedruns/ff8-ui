@@ -105,6 +105,24 @@ choice follows them from the hub into a tool and back.
 
 `repo` accepts a bare repo name (`fish-fins`) or a full URL.
 
+#### Sidebar (optional)
+
+Pass `navbar` for a left sidebar (240px, scrolls on its own). Below the `sm`
+breakpoint it collapses behind a burger button in the header. Pass a function
+to get `closeNavbar`, so picking a link closes the drawer on mobile:
+
+```jsx
+<ToolShell
+  title="Save Viewer"
+  repo="save-viewer"
+  navbar={({ closeNavbar }) => <SectionLinks onPick={closeNavbar} />}
+>
+  {children}
+</ToolShell>
+```
+
+A plain node works too (`navbar={<SectionLinks />}`). Just leave `navbar` out.
+
 ### DPad
 
 Owns the widget and the key bindings - arrow keys always, WASD when focus isn't

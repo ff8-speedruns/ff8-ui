@@ -1,18 +1,35 @@
 import PropTypes from 'prop-types';
-import { ActionIcon, Group, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, Burger, Group, Title, Tooltip } from '@mantine/core';
 import { IconArrowNarrowLeft, IconBrandGithub } from '@tabler/icons-react';
 import { ColorSchemeToggle } from './ColorSchemeToggle';
 import { StatusBadge } from './StatusBadge';
-import { GARDEN_URL, repoUrl } from './constants';
+import { GARDEN_URL, NAVBAR_BREAKPOINT, NAVBAR_TOGGLE_LABEL, repoUrl } from './constants';
 
 /**
  * The bar every tool wears. Back to the hub on the left, identity in the
- * middle, the controls that are the same everywhere on the right.
+ * middle, the controls that are the same everywhere on the right. The burger
+ * only appears when the tool has a sidebar (`onNavbarToggle`).
  */
-export function SiteHeader({ title, status, repo, withBackLink = true }) {
+export function SiteHeader({
+  title,
+  status,
+  repo,
+  withBackLink = true,
+  isNavbarOpen = false,
+  onNavbarToggle,
+}) {
   return (
     <Group h="100%" px="md" justify="space-between" wrap="nowrap">
       <Group gap="xs" wrap="nowrap">
+        {onNavbarToggle && (
+          <Burger
+            opened={isNavbarOpen}
+            onClick={onNavbarToggle}
+            hiddenFrom={NAVBAR_BREAKPOINT}
+            size="sm"
+            aria-label={NAVBAR_TOGGLE_LABEL}
+          />
+        )}
         {withBackLink && (
           <Tooltip label="Back to Garden">
             <ActionIcon
@@ -59,4 +76,6 @@ SiteHeader.propTypes = {
   status: PropTypes.string,
   repo: PropTypes.string,
   withBackLink: PropTypes.bool,
+  isNavbarOpen: PropTypes.bool,
+  onNavbarToggle: PropTypes.func,
 };
