@@ -1,18 +1,18 @@
-import { ActionIcon as e, Anchor as t, AppShell as n, Badge as r, Box as i, Container as a, Divider as o, Group as s, MantineProvider as c, Stack as l, Text as u, Title as d, Tooltip as f, createTheme as p, localStorageColorSchemeManager as m, useComputedColorScheme as h, useMantineColorScheme as g } from "@mantine/core";
-import _ from "prop-types";
-import { useHotkeys as v } from "@mantine/hooks";
-import { Fragment as y, jsx as b, jsxs as x } from "react/jsx-runtime";
-import { IconArrowDown as S, IconArrowLeft as C, IconArrowNarrowLeft as w, IconArrowRight as T, IconArrowUp as E, IconAsterisk as D, IconBrandGithub as O, IconMoonStars as k, IconSun as A } from "@tabler/icons-react";
-import { useEffect as j } from "react";
+import { ActionIcon as e, Anchor as t, AppShell as n, Badge as r, Box as i, Burger as a, Container as o, Divider as s, Group as c, MantineProvider as l, ScrollArea as u, Stack as d, Text as f, Title as p, Tooltip as m, createTheme as h, localStorageColorSchemeManager as g, useComputedColorScheme as _, useMantineColorScheme as v } from "@mantine/core";
+import y from "prop-types";
+import { useDisclosure as b, useHotkeys as x } from "@mantine/hooks";
+import { Fragment as S, jsx as C, jsxs as w } from "react/jsx-runtime";
+import { IconArrowDown as T, IconArrowLeft as E, IconArrowNarrowLeft as D, IconArrowRight as O, IconArrowUp as k, IconAsterisk as A, IconBrandGithub as j, IconMoonStars as M, IconSun as N } from "@tabler/icons-react";
+import { useEffect as P } from "react";
 //#region src/theme.js
-var M = {
+var F = {
 	from: "blue",
 	to: "cyan",
 	deg: 45
-}, N = p({
+}, I = h({
 	primaryColor: "blue",
 	defaultRadius: "md",
-	defaultGradient: M,
+	defaultGradient: F,
 	cursorType: "pointer",
 	autoContrast: !0,
 	headings: {
@@ -27,7 +27,7 @@ var M = {
 		} },
 		Badge: { defaultProps: { variant: "filled" } }
 	}
-}), P = "/", F = "https://github.com/ff8-speedruns", I = "ff8-color-scheme", L = {
+}), L = "/", R = "https://github.com/ff8-speedruns", z = "ff8-color-scheme", B = {
 	working: {
 		label: "Working",
 		color: "green",
@@ -47,27 +47,27 @@ var M = {
 		color: "gray"
 	}
 };
-function R(e) {
-	return e?.startsWith("http") ? e : `${F}/${e}`;
+function V(e) {
+	return e?.startsWith("http") ? e : `${R}/${e}`;
 }
 //#endregion
 //#region src/FF8Provider.jsx
-var z = m({ key: I });
-function B() {
-	let { setColorScheme: e } = g(), t = h("light", { getInitialValueInEffect: !1 });
-	return v([["mod+J", () => e(t === "dark" ? "light" : "dark")]]), null;
+var H = g({ key: z });
+function U() {
+	let { setColorScheme: e } = v(), t = _("light", { getInitialValueInEffect: !1 });
+	return x([["mod+J", () => e(t === "dark" ? "light" : "dark")]]), null;
 }
-function V({ children: e, defaultColorScheme: t = "auto" }) {
-	return /* @__PURE__ */ x(c, {
-		theme: N,
-		colorSchemeManager: z,
+function W({ children: e, defaultColorScheme: t = "auto" }) {
+	return /* @__PURE__ */ w(l, {
+		theme: I,
+		colorSchemeManager: H,
 		defaultColorScheme: t,
-		children: [/* @__PURE__ */ b(B, {}), e]
+		children: [/* @__PURE__ */ C(U, {}), e]
 	});
 }
-V.propTypes = {
-	children: _.node,
-	defaultColorScheme: _.oneOf([
+W.propTypes = {
+	children: y.node,
+	defaultColorScheme: y.oneOf([
 		"light",
 		"dark",
 		"auto"
@@ -75,29 +75,29 @@ V.propTypes = {
 };
 //#endregion
 //#region src/ColorSchemeToggle.jsx
-function H({ size: t = "lg", variant: n = "default" }) {
-	let { setColorScheme: r } = g(), i = h("light", { getInitialValueInEffect: !1 }) === "dark";
-	return /* @__PURE__ */ b(f, {
+function G({ size: t = "lg", variant: n = "default" }) {
+	let { setColorScheme: r } = v(), i = _("light", { getInitialValueInEffect: !1 }) === "dark";
+	return /* @__PURE__ */ C(m, {
 		label: i ? "Switch to light mode" : "Switch to dark mode",
-		children: /* @__PURE__ */ b(e, {
+		children: /* @__PURE__ */ C(e, {
 			size: t,
 			variant: n,
 			color: i ? "yellow" : "blue",
 			onClick: () => r(i ? "light" : "dark"),
 			"aria-label": "Toggle color scheme",
-			children: b(i ? A : k, { size: "1.1rem" })
+			children: C(i ? N : M, { size: "1.1rem" })
 		})
 	});
 }
-H.propTypes = {
-	size: _.string,
-	variant: _.string
+G.propTypes = {
+	size: y.string,
+	variant: y.string
 };
 //#endregion
 //#region src/StatusBadge.jsx
-function U({ status: e, ...t }) {
-	let n = L[e];
-	return n ? /* @__PURE__ */ b(r, {
+function K({ status: e, ...t }) {
+	let n = B[e];
+	return n ? /* @__PURE__ */ C(r, {
 		color: n.color,
 		variant: "filled",
 		c: n.textColor ?? "black",
@@ -105,88 +105,97 @@ function U({ status: e, ...t }) {
 		children: n.label
 	}) : null;
 }
-U.propTypes = { status: _.oneOf(Object.keys(L)) };
+K.propTypes = { status: y.oneOf(Object.keys(B)) };
 //#endregion
 //#region src/SiteHeader.jsx
-function W({ title: t, status: n, repo: r, withBackLink: i = !0 }) {
-	return /* @__PURE__ */ x(s, {
+function q({ title: t, status: n, repo: r, withBackLink: i = !0, isNavbarOpen: o = !1, onNavbarToggle: s }) {
+	return /* @__PURE__ */ w(c, {
 		h: "100%",
 		px: "md",
 		justify: "space-between",
 		wrap: "nowrap",
-		children: [/* @__PURE__ */ x(s, {
+		children: [/* @__PURE__ */ w(c, {
 			gap: "xs",
 			wrap: "nowrap",
 			children: [
-				i && /* @__PURE__ */ b(f, {
+				s && /* @__PURE__ */ C(a, {
+					opened: o,
+					onClick: s,
+					hiddenFrom: "sm",
+					size: "sm",
+					"aria-label": "Toggle navigation"
+				}),
+				i && /* @__PURE__ */ C(m, {
 					label: "Back to Garden",
-					children: /* @__PURE__ */ b(e, {
+					children: /* @__PURE__ */ C(e, {
 						size: "lg",
 						variant: "default",
 						component: "a",
 						href: "/",
 						"aria-label": "Back to Garden",
-						children: /* @__PURE__ */ b(w, { size: "1.1rem" })
+						children: /* @__PURE__ */ C(D, { size: "1.1rem" })
 					})
 				}),
-				/* @__PURE__ */ b(d, {
+				/* @__PURE__ */ C(p, {
 					order: 3,
 					lineClamp: 1,
 					children: t
 				}),
-				/* @__PURE__ */ b(U, {
+				/* @__PURE__ */ C(K, {
 					status: n,
 					visibleFrom: "sm"
 				})
 			]
-		}), /* @__PURE__ */ x(s, {
+		}), /* @__PURE__ */ w(c, {
 			gap: "xs",
 			wrap: "nowrap",
-			children: [r && /* @__PURE__ */ b(f, {
+			children: [r && /* @__PURE__ */ C(m, {
 				label: "Source on GitHub",
-				children: /* @__PURE__ */ b(e, {
+				children: /* @__PURE__ */ C(e, {
 					size: "lg",
 					variant: "default",
 					component: "a",
-					href: R(r),
+					href: V(r),
 					target: "_blank",
 					rel: "noreferrer",
 					"aria-label": "Source on GitHub",
-					children: /* @__PURE__ */ b(O, { size: "1.1rem" })
+					children: /* @__PURE__ */ C(j, { size: "1.1rem" })
 				})
-			}), /* @__PURE__ */ b(H, {})]
+			}), /* @__PURE__ */ C(G, {})]
 		})]
 	});
 }
-W.propTypes = {
-	title: _.node.isRequired,
-	status: _.string,
-	repo: _.string,
-	withBackLink: _.bool
+q.propTypes = {
+	title: y.node.isRequired,
+	status: y.string,
+	repo: y.string,
+	withBackLink: y.bool,
+	isNavbarOpen: y.bool,
+	onNavbarToggle: y.func
 };
 //#endregion
 //#region src/ToolFooter.jsx
-function G({ credits: e, repo: n }) {
-	return /* @__PURE__ */ x(y, { children: [/* @__PURE__ */ b(o, { my: "xl" }), /* @__PURE__ */ x(s, {
+function J({ credits: e, repo: n }) {
+	return /* @__PURE__ */ w(S, { children: [/* @__PURE__ */ C(s, { my: "xl" }), /* @__PURE__ */ w(c, {
 		justify: "space-between",
 		align: "flex-start",
 		gap: "md",
 		mb: "xl",
-		children: [/* @__PURE__ */ b(u, {
+		children: [/* @__PURE__ */ C(f, {
 			size: "sm",
 			c: "dimmed",
 			className: "ff8-footer-credits",
-			children: e ? /* @__PURE__ */ x(y, { children: ["Credit: ", e] }) : null
-		}), /* @__PURE__ */ x(s, {
+			children: e ? /* @__PURE__ */ w(S, { children: ["Credit: ", e] }) : null
+		}), /* @__PURE__ */ w(c, {
 			gap: "md",
 			wrap: "nowrap",
-			children: [/* @__PURE__ */ b(t, {
+			children: [/* @__PURE__ */ C(t, {
 				size: "sm",
 				href: "/",
 				children: "Back to Garden"
-			}), n && /* @__PURE__ */ b(t, {
+			}), n && /* @__PURE__ */ C(t, {
 				size: "sm",
-				href: R(n),
+				href: V(n),
 				target: "_blank",
 				rel: "noreferrer",
 				children: "Source"
@@ -194,98 +203,115 @@ function G({ credits: e, repo: n }) {
 		})]
 	})] });
 }
-G.propTypes = {
-	credits: _.node,
-	repo: _.string
+J.propTypes = {
+	credits: y.node,
+	repo: y.string
 };
 //#endregion
 //#region src/ToolShell.jsx
-function K({ title: e, status: r, repo: i, intro: o, links: c = [], credits: d, size: f = "lg", children: p }) {
-	let m = !!o || c.length > 0;
-	return /* @__PURE__ */ x(n, {
+function Y({ title: e, status: r, repo: i, intro: a, links: s = [], credits: l, size: p = "lg", navbar: m, children: h }) {
+	let [g, { toggle: _, close: v }] = b(!1), y = !!a || s.length > 0, x = !!m, S = x ? {
+		width: 240,
+		breakpoint: "sm",
+		collapsed: { mobile: !g }
+	} : void 0, T = typeof m == "function" ? m({ closeNavbar: v }) : m;
+	return /* @__PURE__ */ w(n, {
 		header: { height: 60 },
+		navbar: S,
 		padding: "md",
-		children: [/* @__PURE__ */ b(n.Header, { children: /* @__PURE__ */ b(W, {
-			title: e,
-			status: r,
-			repo: i
-		}) }), /* @__PURE__ */ b(n.Main, {
-			className: "ff8-shell-main",
-			children: /* @__PURE__ */ x(a, {
-				size: f,
-				px: 0,
-				children: [
-					m && /* @__PURE__ */ x(l, {
-						gap: "xs",
-						mb: "lg",
-						children: [o && /* @__PURE__ */ b(u, {
-							size: "sm",
-							c: "dimmed",
-							children: o
-						}), c.length > 0 && /* @__PURE__ */ b(s, {
-							gap: "md",
-							children: c.map((e) => /* @__PURE__ */ b(t, {
+		children: [
+			/* @__PURE__ */ C(n.Header, { children: /* @__PURE__ */ C(q, {
+				title: e,
+				status: r,
+				repo: i,
+				isNavbarOpen: g,
+				onNavbarToggle: x ? _ : void 0
+			}) }),
+			x && /* @__PURE__ */ C(n.Navbar, { children: /* @__PURE__ */ C(n.Section, {
+				grow: !0,
+				component: u,
+				p: "md",
+				children: T
+			}) }),
+			/* @__PURE__ */ C(n.Main, {
+				className: "ff8-shell-main",
+				children: /* @__PURE__ */ w(o, {
+					size: p,
+					px: 0,
+					children: [
+						y && /* @__PURE__ */ w(d, {
+							gap: "xs",
+							mb: "lg",
+							children: [a && /* @__PURE__ */ C(f, {
 								size: "sm",
-								href: e.href,
-								target: e.href.startsWith("http") ? "_blank" : void 0,
-								rel: "noreferrer",
-								children: e.label
-							}, e.href))
-						})]
-					}),
-					p,
-					/* @__PURE__ */ b(G, {
-						credits: d,
-						repo: i
-					})
-				]
+								c: "dimmed",
+								children: a
+							}), s.length > 0 && /* @__PURE__ */ C(c, {
+								gap: "md",
+								children: s.map((e) => /* @__PURE__ */ C(t, {
+									size: "sm",
+									href: e.href,
+									target: e.href.startsWith("http") ? "_blank" : void 0,
+									rel: "noreferrer",
+									children: e.label
+								}, e.href))
+							})]
+						}),
+						h,
+						/* @__PURE__ */ C(J, {
+							credits: l,
+							repo: i
+						})
+					]
+				})
 			})
-		})]
+		]
 	});
 }
-K.propTypes = {
-	title: _.node.isRequired,
-	status: _.string,
-	repo: _.string,
-	intro: _.node,
-	links: _.arrayOf(_.shape({
-		label: _.node.isRequired,
-		href: _.string.isRequired
+Y.propTypes = {
+	title: y.node.isRequired,
+	status: y.string,
+	repo: y.string,
+	intro: y.node,
+	links: y.arrayOf(y.shape({
+		label: y.node.isRequired,
+		href: y.string.isRequired
 	})),
-	credits: _.node,
-	size: _.oneOfType([_.string, _.number]),
-	children: _.node
+	credits: y.node,
+	size: y.oneOfType([y.string, y.number]),
+	navbar: y.oneOfType([y.node, y.func]),
+	children: y.node
 };
 //#endregion
 //#region src/DPad.jsx
-var q = {
+var X = {
 	ArrowUp: "up",
 	ArrowDown: "down",
 	ArrowLeft: "left",
 	ArrowRight: "right"
-}, J = {
+}, Z = {
 	w: "up",
 	s: "down",
 	a: "left",
 	d: "right"
-}, Y = /* @__PURE__ */ new Set([
+}, ee = /* @__PURE__ */ new Set([
 	"INPUT",
 	"TEXTAREA",
 	"SELECT"
 ]);
-function X(e) {
-	return !!e && (Y.has(e.tagName) || e.isContentEditable);
+function te(e) {
+	return !!e && (ee.has(e.tagName) || e.isContentEditable);
 }
-var Z = {
+var Q = {
 	width: "65%",
 	height: "65%"
 };
-function Q({ onPress: t, withWild: n = !1, keyboard: r = !0, keys: a = "all" }) {
-	j(() => {
+function $({ onPress: t, withWild: n = !1, keyboard: r = !0, keys: a = "all" }) {
+	P(() => {
 		if (!r) return;
 		let e = (e) => {
 			if (e.ctrlKey || e.metaKey || e.altKey) return;
-			let n = X(e.target), r = a === "all" && !n ? J[e.key?.toLowerCase()] : void 0, i = q[e.key] ?? r;
+			let n = te(e.target), r = a === "all" && !n ? Z[e.key?.toLowerCase()] : void 0, i = X[e.key] ?? r;
 			i && (e.preventDefault(), t(i));
 		};
 		return window.addEventListener("keydown", e), () => window.removeEventListener("keydown", e);
@@ -295,7 +321,7 @@ function Q({ onPress: t, withWild: n = !1, keyboard: r = !0, keys: a = "all" }) 
 		a
 	]);
 	let o = (e) => () => t(e);
-	return /* @__PURE__ */ x(i, {
+	return /* @__PURE__ */ w(i, {
 		style: {
 			display: "inline-grid",
 			gridTemplateAreas: "\". up .\" \"left center right\" \". down .\"",
@@ -306,54 +332,54 @@ function Q({ onPress: t, withWild: n = !1, keyboard: r = !0, keys: a = "all" }) 
 			alignItems: "center"
 		},
 		children: [
-			/* @__PURE__ */ b(e, {
+			/* @__PURE__ */ C(e, {
 				style: { gridArea: "up" },
 				size: "xl",
 				variant: "default",
 				onClick: o("up"),
 				"aria-label": "Up",
-				children: /* @__PURE__ */ b(E, { style: Z })
+				children: /* @__PURE__ */ C(k, { style: Q })
 			}),
-			/* @__PURE__ */ b(e, {
+			/* @__PURE__ */ C(e, {
 				style: { gridArea: "left" },
 				size: "xl",
 				variant: "default",
 				onClick: o("left"),
 				"aria-label": "Left",
-				children: /* @__PURE__ */ b(C, { style: Z })
+				children: /* @__PURE__ */ C(E, { style: Q })
 			}),
-			n && /* @__PURE__ */ b(e, {
+			n && /* @__PURE__ */ C(e, {
 				style: { gridArea: "center" },
 				size: "xl",
 				variant: "default",
 				onClick: o("wild"),
 				"aria-label": "Wild",
-				children: /* @__PURE__ */ b(D, { style: Z })
+				children: /* @__PURE__ */ C(A, { style: Q })
 			}),
-			/* @__PURE__ */ b(e, {
+			/* @__PURE__ */ C(e, {
 				style: { gridArea: "right" },
 				size: "xl",
 				variant: "default",
 				onClick: o("right"),
 				"aria-label": "Right",
-				children: /* @__PURE__ */ b(T, { style: Z })
+				children: /* @__PURE__ */ C(O, { style: Q })
 			}),
-			/* @__PURE__ */ b(e, {
+			/* @__PURE__ */ C(e, {
 				style: { gridArea: "down" },
 				size: "xl",
 				variant: "default",
 				onClick: o("down"),
 				"aria-label": "Down",
-				children: /* @__PURE__ */ b(S, { style: Z })
+				children: /* @__PURE__ */ C(T, { style: Q })
 			})
 		]
 	});
 }
-Q.propTypes = {
-	onPress: _.func.isRequired,
-	withWild: _.bool,
-	keyboard: _.bool,
-	keys: _.oneOf(["all", "arrows"])
+$.propTypes = {
+	onPress: y.func.isRequired,
+	withWild: y.bool,
+	keyboard: y.bool,
+	keys: y.oneOf(["all", "arrows"])
 };
 //#endregion
-export { M as BRAND_GRADIENT, I as COLOR_SCHEME_KEY, H as ColorSchemeToggle, Q as DPad, V as FF8Provider, P as GARDEN_URL, F as ORG_URL, L as STATUSES, W as SiteHeader, U as StatusBadge, G as ToolFooter, K as ToolShell, R as repoUrl, N as theme };
+export { F as BRAND_GRADIENT, z as COLOR_SCHEME_KEY, G as ColorSchemeToggle, $ as DPad, W as FF8Provider, L as GARDEN_URL, R as ORG_URL, B as STATUSES, q as SiteHeader, K as StatusBadge, J as ToolFooter, Y as ToolShell, V as repoUrl, I as theme };
